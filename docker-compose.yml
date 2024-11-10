@@ -24,9 +24,9 @@ services:
     mysql:
         image: "mysql:5.7" 
         environment:
-            MYSQL_ROOT_PASSWORD: cloudcomputing 
-            MYSQL_DATABASE: cloud
-            MYSQL_USER: EddyKubwimana 
+            MYSQL_ROOT_PASSWORD: capstone
+            MYSQL_DATABASE: digitalart
+            MYSQL_USER: Tchagaka
             MYSQL_PASSWORD: password
         ports:
             - "3306:3306"  
