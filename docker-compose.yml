@@ -24,10 +24,10 @@ services:
   mysql:
     image: "mysql:5.7"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: tino2025!!!
       MYSQL_DATABASE: digitalart
       MYSQL_USER: Tchagaka
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: tino2025!!!
     ports:
       - "3306:3306"
     volumes:
