@@ -2,18 +2,17 @@ version: "3.8"
 
 services:
   web:
-    build: ./flask_app  # Make sure the flask_app directory exists or change this to .
+    build: ./porfolio  # Make sure this points to the correct directory
     ports:
       - "5000:5000"
     environment:
       - REDIS_URL=redis://redis:6379
-      - DATABASE_URL=mysql://flaskapp:${MYSQL_PASSWORD}@mysql/flaskdb  # Using env variables for security
+      - DATABASE_URL=mysql://flaskapp:${MYSQL_PASSWORD}@mysql/flaskdb
     depends_on:
       - redis
       - mysql
     networks:
       - mynetwork
-    restart: always  # Optional: Restart service if it fails
 
   redis:
     image: "redis:alpine"
@@ -21,22 +20,20 @@ services:
       - "6379:6379"
     networks:
       - mynetwork
-    restart: always  # Optional: Restart service if it fails
 
   mysql:
     image: "mysql:5.7"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # Use environment variables for sensitive data
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: digitalart
       MYSQL_USER: Tchagaka
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Use environment variables for sensitive data
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
       - mynetwork
-    restart: always  # Optional: Restart service if it fails
 
 volumes:
   mysql-data:
