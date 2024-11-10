@@ -1,43 +1,46 @@
 version: "3.8"
 
 services:
-    web:
-        build: ./flask_app
-        ports:
-            - "5000:5000"
-        environment:
-            - REDIS_URL=redis://redis:6379
-            - DATABASE_URL=mysql://flaskapp:password@mysql/flaskdb  
-        depends_on:
-            - redis
-            - mysql 
-        networks:
-            - mynetwork
+  web:
+    build: ./flask_app  # Make sure the flask_app directory exists or change this to .
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=mysql://flaskapp:${MYSQL_PASSWORD}@mysql/flaskdb  # Using env variables for security
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - mynetwork
+    restart: always  # Optional: Restart service if it fails
 
-    redis:
-        image: "redis:alpine"
-        ports:
-            - "6379:6379"
-        networks:
-            - mynetwork
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - mynetwork
+    restart: always  # Optional: Restart service if it fails
 
-    mysql:
-        image: "mysql:5.7" 
-        environment:
-            MYSQL_ROOT_PASSWORD: capstone
-            MYSQL_DATABASE: digitalart
-            MYSQL_USER: Tchagaka
-            MYSQL_PASSWORD: password
-        ports:
-            - "3306:3306"  
-        volumes:
-            - mysql-data:/var/lib/mysql  
-        networks:
-            - mynetwork
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # Use environment variables for sensitive data
+      MYSQL_DATABASE: digitalart
+      MYSQL_USER: Tchagaka
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Use environment variables for sensitive data
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mynetwork
+    restart: always  # Optional: Restart service if it fails
 
 volumes:
-    mysql-data:  
+  mysql-data:
 
 networks:
-    mynetwork:
-        driver: bridge
+  mynetwork:
+    driver: bridge
