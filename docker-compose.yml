@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web:
-    build: ./porfolio  # Make sure this points to the correct directory
+    build: ./porfolio  # This points to the correct directory where your Dockerfile is located
     ports:
       - "5000:5000"
     environment:
@@ -24,10 +24,10 @@ services:
   mysql:
     image: "mysql:5.7"
     environment:
-      MYSQL_ROOT_PASSWORD: tino2025!!!
+      MYSQL_ROOT_PASSWORD: Tino2025!!!
       MYSQL_DATABASE: digitalart
       MYSQL_USER: Tchagaka
-      MYSQL_PASSWORD: tino2025!!!
+      MYSQL_PASSWORD: Tino2025!!!
     ports:
       - "3306:3306"
     volumes:
